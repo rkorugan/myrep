@@ -1,0 +1,500 @@
+DB2 Universal Database Version 11.1, 5622-044 (c) Copyright IBM Corp. 1991, 2015
+Licensed Material - Program Property of IBM
+IBM DATABASE 2 Explain Table Format Tool
+
+
+
+******************** EXPLAIN INSTANCE ********************
+
+DB2_VERSION:       11.01.2
+FORMATTED ON DB:   JUPYTER
+SOURCE_NAME:       SYSSH200
+SOURCE_SCHEMA:     NULLID  
+SOURCE_VERSION:      
+EXPLAIN_TIME:      2018-03-21-22.33.24.772000
+EXPLAIN_REQUESTER: DB2ADMIN
+
+Database Context:
+----------------
+	Parallelism:          None
+	CPU Speed:            1.574481e-007
+	Comm Speed:           0
+	Buffer Pool size:     5000
+	Sort Heap size:       256
+	Database Heap size:   3343
+	Lock List size:       4096
+	Maximum Lock List:    97
+	Average Applications: 1
+	Locks Available:      127139
+
+Package Context:
+---------------
+	SQL Type:           Dynamic
+	Optimization Level: 5
+	Blocking:           Block All Cursors
+	Isolation Level:    Cursor Stability
+
+
+
+---------------- STATEMENT 1  SECTION 65 ----------------
+	QUERYNO:       1
+	QUERYTAG:                          
+	Statement Type:   Searched Delete
+	Updatable:        Not Applicable
+	Deletable:        Not Applicable
+	Query Degree:     1
+
+Original Statement:
+------------------
+DELETE 
+FROM 
+  DEPARTMENT 
+WHERE 
+  DEPTNAME = 
+  (SELECT 
+     DEPTNAME 
+   FROM 
+     DEPARTMENT 
+   WHERE 
+     DEPTNO='B01'
+  )
+
+
+Optimized Statement:
+-------------------
+DELETE 
+FROM 
+  DB2ADMIN.DEPARTMENT AS Q1 
+WHERE 
+  $RID$ IN 
+  (SELECT 
+     $RID$ 
+   FROM 
+     (SELECT 
+        Q2.DEPTNAME 
+      FROM 
+        DB2ADMIN.DEPARTMENT AS Q2 
+      WHERE 
+        (Q2.DEPTNO = 'B01')
+     ) AS Q3,
+     DB2ADMIN.DEPARTMENT AS Q4 
+   WHERE 
+     (Q4.DEPTNAME = Q3.DEPTNAME)
+  )
+
+Explain level:    Explain from section
+
+Access Plan:
+-----------
+	Total Cost: 		22.0194
+	Query Degree:		1
+
+
+                  Rows 
+               Rows Actual
+                 RETURN
+                 (   1)
+                  Cost 
+                   I/O 
+                   |
+                  1.25 
+                    0 
+                 DELETE
+                 (   2)
+                 22.0194 
+                   NA 
+               /---+----\
+            1.25          10 
+              0           NA 
+           NLJOIN   TABLE: DB2ADMIN
+           (   3)     DEPARTMENT
+           13.5606        Q1
+             NA 
+         /---+----\
+        1          1.25 
+        0            0 
+     TBSCAN       TBSCAN
+     (   4)       (   7)
+     6.78399      6.77665 
+       NA           NA 
+       |            |
+        1           10 
+        0           NA 
+     TEMP     TABLE: DB2ADMIN
+     (   5)     DEPARTMENT
+     6.77864        Q4
+       NA 
+       |
+        1 
+        0 
+     TBSCAN
+     (   6)
+     6.77665 
+       NA 
+       |
+       10 
+       NA 
+ TABLE: DB2ADMIN
+   DEPARTMENT
+       Q2
+
+
+
+Extended Diagnostic Information:
+--------------------------------
+
+Diagnostic Identifier: 	1
+Diagnostic Details: 	EXP0080W  The current usage of the statement or the
+			statement containing update, delete or insert or
+			constructs like sampling limits MQT matching.
+
+Plan Details:
+-------------
+
+
+	1) RETURN: (Return Result)
+		Cumulative Total Cost: 		22.0194
+		Cumulative First Row Cost: 	22.0194
+		Estimated Bufferpool Buffers: 	3
+
+		Arguments:
+		---------
+		BLDLEVEL: (Build level)
+			DB2 v11.1.2020.1393 : s1706091900
+		EXECUTID: (Executable ID)
+			01000000000000003C0600000000000000000000020020180321223324042002
+		HEAPUSE : (Maximum Statement Heap Usage)
+			96 Pages
+		PLANID  : (Access plan identifier)
+			1a1adabfdc680fa7
+		SEMEVID : (Semantic environment identifier)
+			8592dd1fccfabb08
+		STMTHEAP: (Statement heap size)
+			8192
+		STMTID  : (Normalized statement identifier)
+			6106940dbb4b5e8a
+
+		Input Streams:
+		-------------
+			9) From Operator #2
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+	2) DELETE: (Delete)
+		Cumulative Total Cost: 		22.0194
+		Cumulative First Row Cost: 	22.0194
+		Estimated Bufferpool Buffers: 	3
+
+		Input Streams:
+		-------------
+			7) From Operator #3
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+		Output Streams:
+		--------------
+			8) To Object DB2ADMIN.DEPARTMENT
+
+				Estimated number of rows: 	10
+
+				Column Names:
+				------------
+				+Q1.$RID$
+
+			9) To Operator #1
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+	3) NLJOIN: (Nested Loop Join)
+		Cumulative Total Cost: 		13.5606
+		Cumulative First Row Cost: 	13.5596
+		Estimated Bufferpool Buffers: 	2
+
+		Arguments:
+		---------
+		EARLYOUT: (Early Out flag)
+			NONE
+		FETCHMAX: (Override for FETCH MAXPAGES)
+			IGNORE
+		ISCANMAX: (Override for ISCAN MAXPAGES)
+			IGNORE
+
+		Predicates:
+		----------
+		2) Predicate used in Join, 
+			Comparison Operator: 		Equal (=)
+			Subquery Input Required: 	No
+			Filter Factor: 			0.125
+
+			Predicate Text:
+			--------------
+			(Q4.DEPTNAME = Q3.DEPTNAME)
+
+
+
+		Input Streams:
+		-------------
+			4) From Operator #4
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+			6) From Operator #7
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+		Output Streams:
+		--------------
+			7) To Operator #2
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+	4) TBSCAN: (Table Scan)
+		Cumulative Total Cost: 		6.78399
+		Cumulative First Row Cost: 	6.78399
+		Estimated Bufferpool Buffers: 	1
+
+		Arguments:
+		---------
+		JN INPUT: (Join input leg)
+			OUTER
+		MAXPAGES: (Maximum pages for prefetch)
+			ALL
+		PREFETCH: (Type of Prefetch)
+			NONE                
+		SCANDIR : (Scan Direction)
+			FORWARD
+		SPEED   : (Assumed speed of scan, in sharing structures)
+			SLOW
+		THROTTLE: (Scan may be throttled, for scan sharing)
+			FALSE
+		VISIBLE : (May be included in scan sharing structures)
+			FALSE
+		WRAPPING: (Scan may start anywhere and wrap)
+			FALSE
+
+		Input Streams:
+		-------------
+			3) From Operator #5
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+
+		Output Streams:
+		--------------
+			4) To Operator #3
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+
+	5) TEMP  : (Create Temporary Table)
+		Cumulative Total Cost: 		6.77864
+		Cumulative First Row Cost: 	6.77864
+		Estimated Bufferpool Buffers: 	1
+
+		Arguments:
+		---------
+		CSETEMP : (Temp over common sub-expression flag)
+			FALSE
+		SLOWMAT : (Slow Materialization flag)
+			FALSE
+		TEMPSIZE: (Temporary Table Page Size)
+			4096
+
+		Input Streams:
+		-------------
+			2) From Operator #6
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+
+		Output Streams:
+		--------------
+			3) To Operator #4
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+
+	6) TBSCAN: (Table Scan)
+		Cumulative Total Cost: 		6.77665
+		Cumulative First Row Cost: 	6.77631
+		Estimated Bufferpool Buffers: 	1
+
+		Arguments:
+		---------
+		CUR_COMM: (Currently Committed)
+			TRUE
+		LCKAVOID: (Lock Avoidance)
+			TRUE
+		MAXPAGES: (Maximum pages for prefetch)
+			ALL
+		PREFETCH: (Type of Prefetch)
+			NONE                
+		ROWLOCK : (Row Lock intent)
+			SHARE (CS/RS)
+		SCANDIR : (Scan Direction)
+			FORWARD
+		SKIP_INS: (Skip Inserted Rows)
+			TRUE
+		SPEED   : (Assumed speed of scan, in sharing structures)
+			FAST
+		TABLOCK : (Table Lock intent)
+			INTENT SHARE
+		TBISOLVL: (Table access Isolation Level)
+			CURSOR STABILITY
+		THROTTLE: (Scan may be throttled, for scan sharing)
+			TRUE
+		VISIBLE : (May be included in scan sharing structures)
+			TRUE
+		WRAPPING: (Scan may start anywhere and wrap)
+			TRUE
+
+		Predicates:
+		----------
+		3) Sargable Predicate, 
+			Comparison Operator: 		Equal (=)
+			Subquery Input Required: 	No
+			Filter Factor: 			0.1
+
+			Predicate Text:
+			--------------
+			(Q2.DEPTNO = 'B01')
+
+
+
+		Input Streams:
+		-------------
+			1) From Object DB2ADMIN.DEPARTMENT
+
+				Estimated number of rows: 	10
+
+				Column Names:
+				------------
+				+Q2.$RID$+Q2.DEPTNAME+Q2.DEPTNO
+
+
+		Output Streams:
+		--------------
+			2) To Operator #5
+
+				Estimated number of rows: 	1
+				Actual number of rows: 		0
+
+
+	7) TBSCAN: (Table Scan)
+		Cumulative Total Cost: 		6.77665
+		Cumulative First Row Cost: 	6.77565
+		Estimated Bufferpool Buffers: 	1
+
+		Arguments:
+		---------
+		JN INPUT: (Join input leg)
+			INNER
+		MAXPAGES: (Maximum pages for prefetch)
+			ALL
+		PREFETCH: (Type of Prefetch)
+			NONE                
+		ROWLOCK : (Row Lock intent)
+			UPDATE
+		SCANDIR : (Scan Direction)
+			FORWARD
+		SKIP_INS: (Skip Inserted Rows)
+			TRUE
+		SPEED   : (Assumed speed of scan, in sharing structures)
+			FAST
+		TABLOCK : (Table Lock intent)
+			INTENT EXCLUSIVE
+		TBISOLVL: (Table access Isolation Level)
+			CURSOR STABILITY
+		THROTTLE: (Scan may be throttled, for scan sharing)
+			FALSE
+		VISIBLE : (May be included in scan sharing structures)
+			TRUE
+		WRAPPING: (Scan may start anywhere and wrap)
+			FALSE
+
+		Predicates:
+		----------
+		2) Sargable Predicate, 
+			Comparison Operator: 		Equal (=)
+			Subquery Input Required: 	No
+			Filter Factor: 			0.125
+
+			Predicate Text:
+			--------------
+			(Q4.DEPTNAME = Q3.DEPTNAME)
+
+
+
+		Input Streams:
+		-------------
+			5) From Object DB2ADMIN.DEPARTMENT
+
+				Estimated number of rows: 	10
+
+				Column Names:
+				------------
+				+Q4.$RID$+Q4.DEPTNAME
+
+
+		Output Streams:
+		--------------
+			6) To Operator #3
+
+				Estimated number of rows: 	1.25
+				Actual number of rows: 		0
+
+
+Objects Used in Access Plan:
+---------------------------
+
+	Schema: DB2ADMIN
+	Name: 	DEPARTMENT
+	Type: 	Table
+			Last statistics update: 	2018-03-21-20.36.52.908003
+			Number of rows: 		10
+			Number of buffer pool pages: 	1
+			Distinct row values: 		No
+			Tablespace name: 		USERSPACE1
+			Tablespace overhead: 		6.725000
+			Tablespace transfer rate: 	0.040000
+			Prefetch page count: 		32
+			Container extent page count: 	32
+			Table overflow record count: 	0
+			Table Active Blocks: 		-1
+			Average Row Compression Ratio: 	0
+			Percentage Rows Compressed: 	0
+			Average Compressed Row Size: 	0
+
+Runtime statistics for objects Used in Access Plan:
+-----------------------------------------------------
+
+	Schema: DB2ADMIN
+	Name: 	DEPARTMENT
+	Type: 	Table
+
+			Member 0
+			---------
+
+				Metrics
+				--------------------
+				rows_reads:10
+				object_data_l_reads:1
+				object_data_lbp_pages_found:1
+				object_data_gbp_indep_pages_found_in_lbp:1
+				object_data_caching_tier_gbp_indep_pages_found:1
+
