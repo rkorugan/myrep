@@ -1,0 +1,35 @@
+<html><body><table border="1"><CAPTION><b>DELETE PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> DELETE 
+ FROM 
+   DEPARTMENT 
+ WHERE 
+   DEPTNAME = 
+   (SELECT 
+      DEPTNAME 
+    FROM 
+      DEPARTMENT 
+    WHERE 
+      DEPTNO='B01'
+   )
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> DELETE 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   $RID$ IN 
+   (SELECT 
+      $RID$ 
+    FROM 
+      (SELECT 
+         Q2.DEPTNAME 
+       FROM 
+         DB2ADMIN.DEPARTMENT AS Q2 
+       WHERE 
+         (Q2.DEPTNO = 'B01')
+      ) AS Q3,
+      DB2ADMIN.DEPARTMENT AS Q4 
+    WHERE 
+      (Q4.DEPTNAME = Q3.DEPTNAME)
+   )
+ 
+</td><td align=left width=5% "><object data = "C:\PD\DELETE\DB2CAEM_2018-03-21-22.33.22.822000\db2caem.exfmt.1.plan"height="200"/></td></tr>

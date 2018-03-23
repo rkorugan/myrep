@@ -1,0 +1,31 @@
+<html><body><table border="1"><CAPTION><b>INSERT PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT (DEPTNO, DEPTNAME, MGRNO, ADMRDEPT, LOCATION) VALUES 
+          ('X00', 'SPIFFY COMPUTER SERVICE DIV.', '000010', 'A00', NULL)
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT AS Q3 
+ SELECT 
+   NULL,
+   'A00',
+   '000010',
+   'SPIFFY COMPUTER SERVICE DIV.',
+   'X00' 
+ FROM 
+   (VALUES 
+      1) AS Q1
+ 
+</td><td align=left width=5% "><object data = "C:\PD\INSERT\DB2CAEM_2018-03-21-22.33.16.692000\db2caem.exfmt.1.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT (DEPTNO, DEPTNAME, MGRNO, ADMRDEPT, LOCATION) VALUES 
+          ('z00', 'SPIFFY COMPUTER SERVICE DIV.', '000010', 'A00', NULL)
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT AS Q3 
+ SELECT 
+   NULL,
+   'A00',
+   '000010',
+   'SPIFFY COMPUTER SERVICE DIV.',
+   'z00' 
+ FROM 
+   (VALUES 
+      1) AS Q1
+ 
+</td><td align=left width=5% "><object data = "C:\PD\INSERT\DB2CAEM_2018-03-21-22.33.16.692000\db2caem.exfmt.2.plan"height="200"/></td></tr>

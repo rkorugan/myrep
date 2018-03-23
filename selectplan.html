@@ -1,0 +1,108 @@
+<html><body><table border="1"><CAPTION><b>SELECT PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   * 
+ FROM 
+   EMPLOYEE
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.EMPNO AS "EMPNO",
+   Q1.FIRSTNME AS "FIRSTNME",
+   Q1.MIDINIT AS "MIDINIT",
+   Q1.LASTNAME AS "LASTNAME",
+   Q1.WORKDEPT AS "WORKDEPT",
+   Q1.PHONENO AS "PHONENO",
+   Q1.HIREDATE AS "HIREDATE",
+   Q1.JOB AS "JOB",
+   Q1.EDLEVEL AS "EDLEVEL",
+   Q1.SEX AS "SEX",
+   Q1.BIRTHDATE AS "BIRTHDATE",
+   Q1.SALARY AS "SALARY",
+   Q1.BONUS AS "BONUS",
+   Q1.COMM AS "COMM" 
+ FROM 
+   DB2ADMIN.EMPLOYEE AS Q1
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.1.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   * 
+ FROM 
+   DEPARTMENT
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.DEPTNO AS "DEPTNO",
+   Q1.DEPTNAME AS "DEPTNAME",
+   Q1.MGRNO AS "MGRNO",
+   Q1.ADMRDEPT AS "ADMRDEPT",
+   Q1.LOCATION AS "LOCATION" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.2.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   deptname 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.DEPTNAME AS "DEPTNAME" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.3.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   LOCATION 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.LOCATION AS "LOCATION" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.4.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   MGRNO 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.MGRNO AS "MGRNO" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.5.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   E.EMPNO,
+   E.FIRSTNME,
+   E.LASTNAME 
+ FROM 
+   EMPLOYEE E,
+   DEPARTMENT D 
+ WHERE 
+   E.WORKDEPT=D.DEPTNO AND 
+   E.EMPNO='000050'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   '000050' AS "EMPNO",
+   Q2.FIRSTNME AS "FIRSTNME",
+   Q2.LASTNAME AS "LASTNAME" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1,
+   DB2ADMIN.EMPLOYEE AS Q2 
+ WHERE 
+   (Q2.EMPNO = '000050') AND 
+   (Q2.WORKDEPT = Q1.DEPTNO)
+ 
+</td><td align=left width=5% "><object data = "C:\PD\SELECT\DB2CAEM_2018-03-21-22.32.54.013000\db2caem.exfmt.6.plan"height="200"/></td></tr>
