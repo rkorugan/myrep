@@ -1,0 +1,197 @@
+<html><body><table border="1"><CAPTION><b>SELECT PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   * 
+ FROM 
+   EMPLOYEE
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.EMPNO AS "EMPNO",
+   Q1.FIRSTNME AS "FIRSTNME",
+   Q1.MIDINIT AS "MIDINIT",
+   Q1.LASTNAME AS "LASTNAME",
+   Q1.WORKDEPT AS "WORKDEPT",
+   Q1.PHONENO AS "PHONENO",
+   Q1.HIREDATE AS "HIREDATE",
+   Q1.JOB AS "JOB",
+   Q1.EDLEVEL AS "EDLEVEL",
+   Q1.SEX AS "SEX",
+   Q1.BIRTHDATE AS "BIRTHDATE",
+   Q1.SALARY AS "SALARY",
+   Q1.BONUS AS "BONUS",
+   Q1.COMM AS "COMM" 
+ FROM 
+   DB2ADMIN.EMPLOYEE AS Q1
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.1_SELECT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   * 
+ FROM 
+   DEPARTMENT
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.DEPTNO AS "DEPTNO",
+   Q1.DEPTNAME AS "DEPTNAME",
+   Q1.MGRNO AS "MGRNO",
+   Q1.ADMRDEPT AS "ADMRDEPT",
+   Q1.LOCATION AS "LOCATION" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.2_SELECT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   deptname 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.DEPTNAME AS "DEPTNAME" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.3_SELECT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   LOCATION 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.LOCATION AS "LOCATION" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.4_SELECT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   MGRNO 
+ FROM 
+   department 
+ WHERE 
+   deptno='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   Q1.MGRNO AS "MGRNO" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   (Q1.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.5_SELECT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   E.EMPNO,
+   E.FIRSTNME,
+   E.LASTNAME 
+ FROM 
+   EMPLOYEE E,
+   DEPARTMENT D 
+ WHERE 
+   E.WORKDEPT=D.DEPTNO AND 
+   E.EMPNO='000050'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> SELECT 
+   '000050' AS "EMPNO",
+   Q2.FIRSTNME AS "FIRSTNME",
+   Q2.LASTNAME AS "LASTNAME" 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1,
+   DB2ADMIN.EMPLOYEE AS Q2 
+ WHERE 
+   (Q2.EMPNO = '000050') AND 
+   (Q2.WORKDEPT = Q1.DEPTNO)
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.6_SELECT.plan"height="200"/></td></tr>
+<html><body><table border="1"><CAPTION><b>UPDATE PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> UPDATE DEPARTMENT SET LOCATION='BLR' 
+ WHERE 
+   DEPTNO='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> UPDATE DB2ADMIN.DEPARTMENT AS Q1 SET (Q1.LOCATION) = 
+ SELECT 
+   'BLR ' 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q2 
+ WHERE 
+   (Q2.DEPTNO = '? ')
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.1_UPDATE.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> UPDATE DEPARTMENT A SET LOCATION='?'
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> UPDATE DB2ADMIN.DEPARTMENT AS Q1 SET (Q1.LOCATION) = 
+ SELECT 
+   '? ' 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q2
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.2_UPDATE.plan"height="200"/></td></tr>
+<html><body><table border="1"><CAPTION><b>INSERT PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT (DEPTNO, DEPTNAME, MGRNO, ADMRDEPT, LOCATION) VALUES 
+          ('X00', 'SPIFFY COMPUTER SERVICE DIV.', '000010', 'A00', NULL)
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT AS Q3 
+ SELECT 
+   NULL,
+   'A00',
+   '000010',
+   'SPIFFY COMPUTER SERVICE DIV.',
+   'X00' 
+ FROM 
+   (VALUES 
+      1) AS Q1
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.1_INSERT.plan"height="200"/></td></tr><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT (DEPTNO, DEPTNAME, MGRNO, ADMRDEPT, LOCATION) VALUES 
+          ('z00', 'SPIFFY COMPUTER SERVICE DIV.', '000010', 'A00', NULL)
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> INSERT INTO DB2ADMIN.DEPARTMENT AS Q3 
+ SELECT 
+   NULL,
+   'A00',
+   '000010',
+   'SPIFFY COMPUTER SERVICE DIV.',
+   'z00' 
+ FROM 
+   (VALUES 
+      1) AS Q1
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.2_INSERT.plan"height="200"/></td></tr>
+<html><body><table border="1"><CAPTION><b>DELETE PERFORMANCE REPORT - PROCDEPT</b></CAPTION><thead><th>Original Query</th><th>Optimized Query</th><th>Access Plan</th></thead><tr><td align=left width=20% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> DELETE 
+ FROM 
+   DEPARTMENT 
+ WHERE 
+   DEPTNAME = 
+   (SELECT 
+      DEPTNAME 
+    FROM 
+      DEPARTMENT 
+    WHERE 
+      DEPTNO='B01'
+   )
+ 
+ 
+</td><td align=left width=40% style="white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word"> DELETE 
+ FROM 
+   DB2ADMIN.DEPARTMENT AS Q1 
+ WHERE 
+   $RID$ IN 
+   (SELECT 
+      $RID$ 
+    FROM 
+      (SELECT 
+         Q2.DEPTNAME 
+       FROM 
+         DB2ADMIN.DEPARTMENT AS Q2 
+       WHERE 
+         (Q2.DEPTNO = 'B01')
+      ) AS Q3,
+      DB2ADMIN.DEPARTMENT AS Q4 
+    WHERE 
+      (Q4.DEPTNAME = Q3.DEPTNAME)
+   )
+ 
+</td><td align=left width=5% "><object data = "db2caem.exfmt.1_DELETE.plan"height="200"/></td></tr>
