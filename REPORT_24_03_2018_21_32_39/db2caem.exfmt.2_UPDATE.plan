@@ -1,0 +1,35 @@
+Access Plan:
+-----------
+	Total Cost: 		304.535
+	Query Degree:		1
+
+
+            Rows 
+         Rows Actual
+           RETURN
+           (   1)
+            Cost 
+             I/O 
+             |
+             44 
+              0 
+           UPDATE
+           (   2)
+           304.535 
+             NA 
+         /---+----\
+       44           44 
+       10           NA 
+     TBSCAN   TABLE: DB2ADMIN
+     (   3)     DEPARTMENT
+     6.78517        Q1
+       NA 
+       |
+       44 
+       NA 
+ TABLE: DB2ADMIN
+   DEPARTMENT
+       Q2
+
+
+
