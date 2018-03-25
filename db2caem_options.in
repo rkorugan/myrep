@@ -1,1 +1,0 @@
-db2caem -d JUPYTER -o DELETE -u db2admin -p xxxxxxxx -sf PROCDEPT.001.lob_delete.sql_final.sql_varrem.sql 
