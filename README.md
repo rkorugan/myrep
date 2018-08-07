@@ -1,4 +1,4 @@
-# myrep
+# DB2PY
 
 DB2PY tool is developed to automate the SQL query performance analysis process. 
 This tool will parse the entire stored procedure to identify the SQLs and generate a report showing   the execution plan 
